@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 interface CompanyInfo {
   name: string;
+  ceo: string;
   address: string;
   phone: string;
   email: string;
@@ -51,6 +52,7 @@ interface QuoteHistory {
 function App() {
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo>({
     name: '(주)프로다코퍼레이션',
+    ceo: '대표 한대열',
     address: '서울특별시 영등포구 영신로 166, 6층 614호',
     phone: '02-2633-6581',
     email: 'official@proda.net',
@@ -346,6 +348,7 @@ function App() {
           
           <div class="company">
             <h2>${previewData.companyInfo.name}</h2>
+            <p style="font-weight: bold; margin: 3px 0;">${previewData.companyInfo.ceo}</p>
             <p>${previewData.companyInfo.address}</p>
             <p>T. ${previewData.companyInfo.phone} | E. ${previewData.companyInfo.email}</p>
             <p>사업자등록번호: ${previewData.companyInfo.businessNumber}</p>
@@ -488,6 +491,13 @@ function App() {
               placeholder="회사명"
               value={companyInfo.name}
               onChange={(e) => setCompanyInfo({ ...companyInfo, name: e.target.value })}
+              style={inputStyle}
+            />
+            <input
+              type="text"
+              placeholder="대표자명"
+              value={companyInfo.ceo}
+              onChange={(e) => setCompanyInfo({ ...companyInfo, ceo: e.target.value })}
               style={inputStyle}
             />
             <input
@@ -902,6 +912,7 @@ function App() {
 
                     <div style={{ marginBottom: '20px', borderLeft: '3px solid #000', paddingLeft: '15px' }}>
                       <h2 style={{ fontSize: '14px', fontWeight: 'bold', margin: '0 0 8px 0' }}>{previewData.companyInfo.name}</h2>
+                      <p style={{ fontSize: '10px', margin: '2px 0', fontWeight: 'bold' }}>{previewData.companyInfo.ceo}</p>
                       <p style={{ fontSize: '10px', margin: '2px 0' }}>{previewData.companyInfo.address}</p>
                       <p style={{ fontSize: '10px', margin: '2px 0' }}>T. {previewData.companyInfo.phone} | E. {previewData.companyInfo.email}</p>
                       <p style={{ fontSize: '10px', margin: '2px 0' }}>사업자등록번호: {previewData.companyInfo.businessNumber}</p>
