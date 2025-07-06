@@ -79,6 +79,36 @@ function App() {
   const [recentServices, setRecentServices] = useState<ServiceTemplate[]>([]);
   const [quoteHistory, setQuoteHistory] = useState<QuoteHistory[]>([]);
 
+  // localStorage 저장/로드
+  useEffect(() => {
+    const savedRecent = localStorage.getItem('proda-recent-services');
+    const savedHistory = localStorage.getItem('proda-quote-history');
+    
+    if (savedRecent) {
+      try {
+        setRecentServices(JSON.parse(savedRecent));
+      } catch (e) {
+        console.error('Recent services parse error:', e);
+      }
+    }
+    
+    if (savedHistory) {
+      try {
+        setQuoteHistory(JSON.parse(savedHistory));
+      } catch (e) {
+        console.error('Quote history parse error:', e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('proda-recent-services', JSON.stringify(recentServices));
+  }, [recentServices]);
+
+  useEffect(() => {
+    localStorage.setItem('proda-quote-history', JSON.stringify(quoteHistory));
+  }, [quoteHistory]);
+
   const serviceTemplates: ServiceTemplate[] = [
     { name: '인스타그램', description: '인스타그램 계정 운영 및 콘텐츠 제작', originalPrice: 800000 },
     { name: '네이버블로그', description: '네이버 블로그 포스팅 및 SEO 최적화', originalPrice: 600000 },
